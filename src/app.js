@@ -13,6 +13,23 @@ export const createApp = function createApp() {
 
   sync(store, router);
 
+  router.beforeEach((to, from, next) => {
+    store.commit("trans/enter");
+    if (typeof(window) === "object") {
+      window.setTimeout(() => {
+        store.commit("trans/leave");
+      }, 500);
+    }
+
+    if (typeof(window) === "object") {
+      window.setTimeout(() => {
+        next();
+      }, 1000);
+    } else {
+      next();
+    }
+  });
+
   const app = new Vue({
     router,
     store,

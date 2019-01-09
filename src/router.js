@@ -9,7 +9,7 @@ const PagePost = () => import(/* webpackChunkName: "pagePost" */ "VUE_PAGE/post/
 Vue.use(VueRouter);
 
 const routes = [
-  { path: "/", component: PageIndex },
+  { path: "/", name: "index", component: PageIndex },
   { path: "/about", component: PageAbout },
   { path: "/post/:id", component: PagePost }
 ];
