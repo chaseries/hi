@@ -1,4 +1,4 @@
-import { lookupTrans } from "./util";
+import { getCurrentTrans } from "./util";
 
 
 const state = {
@@ -38,19 +38,13 @@ const mutations = {
 
 const getters = {
 
-  currentTrans(state, _, rootState) {
-    if (state.override !== null) { return state.override; }
-    const from = rootState.route.from.path;
-    const to = rootState.route.path;
-    const lookedUp = lookupTrans(state.defaults, from, to);
-    if (lookedUp !== null) { return lookedUp; }
-    return null;
+  currentTrans (state, _, rootState) {
+    return getCurrentTrans(state, rootState.route.from.path, rootState.route.path);
   },
 
   hasTrans(_, getters) {
     return getters.currentTrans !== null ? true : false;
   }
-
 };
 
 export default {

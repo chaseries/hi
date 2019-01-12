@@ -3,7 +3,7 @@ import App from "./App.vue";
 import { createRouter } from "SRC/router";
 import { createStore } from "SRC/store/store";
 import { sync } from "vuex-router-sync";
-
+import { getCurrentTrans } from "VUE_STORE/trans/util";
 
 
 export const createApp = function createApp() {
@@ -14,20 +14,7 @@ export const createApp = function createApp() {
   sync(store, router);
 
   router.beforeEach((to, from, next) => {
-    store.commit("trans/enter");
-    if (typeof(window) === "object") {
-      window.setTimeout(() => {
-        store.commit("trans/leave");
-      }, 500);
-    }
-
-    if (typeof(window) === "object") {
-      window.setTimeout(() => {
-        next();
-      }, 1000);
-    } else {
-      next();
-    }
+    next();
   });
 
   const app = new Vue({

@@ -1,14 +1,20 @@
 <template>
   <div>
+    <hero></hero>
     About page
   </div>
 </template>
 
 <script>
-import LayoutHeader from "VUE_COMPONENT/layout/header/LayoutHeader.vue";
+import Hero from "VUE_COMPONENT/hero/Hero.vue";
+import loadingMixin from "VUE_PAGE/mixin/loading";
 
 
 export default {
-  name: "page-about"
+  name: "page-about",
+  components: {
+    Hero
+  },
+  mixins: [loadingMixin]
 };
 </script>

@@ -1,7 +1,15 @@
 <template>
   <div id="app">
     <div>
-      <div v-if="!hasTrans">
+      <div>
+        <ul>
+          <li>Total assets: {{ totalAssets }}</li>
+          <li>Total loaded: {{ totalLoaded }}</li>
+          <li>Finished loading? {{ isLoaded }}</li>
+          <li>Init app load is complete? {{ initAppLoadIsComplete }}</li>
+        </ul>
+      </div>
+      <div v-if="hasTrans">
         The trans type is {{ transType }}.
         <br>
         Should it be playing? {{ isPlaying }}
@@ -11,30 +19,23 @@
       </div>
     </div>
 
-
-    <layout-header></layout-header>
-
+    <transition :duration="500" mode="out-in">
     <router-view></router-view>
-    <!-- <div v-if="hasTrans"> -->
-      <!-- <transition :duration="500" mode="out-in"> -->
-        <!-- <router-view></router-view> -->
-      <!-- </transition> -->
-    <!-- </div> -->
-
-    <layout-footer></layout-footer>
+    </transition>
   </div>
 </template>
 
 <script>
 import LayoutHeader from "VUE_COMPONENT/layout/header/LayoutHeader.vue";
 import LayoutFooter from "VUE_COMPONENT/layout/footer/LayoutFooter.vue";
-import TransDefaul from "VUE_COMPONENT/trans/default/Main.vue";
+import TransDefault from "VUE_COMPONENT/trans/default/Main.vue";
 
 export default {
   name: "app",
   components: {
     LayoutHeader,
-    LayoutFooter
+    LayoutFooter,
+    TransDefault
   },
   computed: {
     transType () {
@@ -45,6 +46,18 @@ export default {
     },
     isPlaying () {
       return this.$store.state.trans.play;
+    },
+    totalAssets () {
+      return this.$store.state.loading.currentPage.totalAssets;
+    },
+    totalLoaded () {
+      return this.$store.state.loading.currentPage.totalLoaded;
+    },
+    isLoaded () {
+      return this.$store.getters["loading/isLoaded"];
+    },
+    initAppLoadIsComplete () {
+      return this.$store.state.loading.initAppLoadIsComplete;
     }
   }
 };

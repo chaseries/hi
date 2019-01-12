@@ -18,7 +18,8 @@ const baseConfig = {
       "SRC": path.resolve(__dirname, "../src"),
       "SASS": path.resolve(__dirname, "../src/sass"),
       "VUE_COMPONENT": path.resolve(__dirname, "../src/component"),
-      "VUE_PAGE": path.resolve(__dirname, "../src/page")
+      "VUE_PAGE": path.resolve(__dirname, "../src/page"),
+      "VUE_STORE": path.resolve(__dirname, "../src/store")
     }
   },
   module: {

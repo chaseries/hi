@@ -1,6 +1,5 @@
 
-export const lookupTrans = (ts, from, to) => {
-
+const lookupTrans = (ts, from, to) => {
   const exactMatches = ts.filter((t) => { 
     return (t.from === from) && (t.to === to); 
   });
@@ -16,5 +15,12 @@ export const lookupTrans = (ts, from, to) => {
 
   if (partialMatches.length > 0) { return partialMatches[0].trans; }
 
+  return null;
+};
+
+export const getCurrentTrans = (state, from, to) => {
+  if (state.override !== null) { return state.override; }
+  const fallback = lookupTrans(state.defaults, from, to);
+  if (fallback !== null) { return fallback; }
   return null;
 };
