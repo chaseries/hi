@@ -15,14 +15,6 @@ const mutations = {
     state.currentPage.totalLoaded += n;
   },
 
-  incrementTotalAssets (state) {
-    state.currentPage.totalAssets += 1;
-  },
-
-  incrementTotalLoaded (state) {
-    state.currentPage.totalLoaded += 1;
-  },
-
   stopCounting (state) {
     state.currentPage.isFinishedCounting = true;
   },

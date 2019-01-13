@@ -25,8 +25,7 @@ export default {
     Hero
   },
   loadableImages: [
-    "https://bit.ly/2yq6794",
-    "https://bit.ly/2H8XJS4"
+    "https://bit.ly/2yq6794"
   ]
 };
 </script>

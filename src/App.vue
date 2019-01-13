@@ -1,26 +1,9 @@
 <template>
   <div id="app">
-    <div>
-      <div>
-        <ul>
-          <li>Total assets: {{ totalAssets }}</li>
-          <li>Total loaded: {{ totalLoaded }}</li>
-          <li>Finished loading? {{ isLoaded }}</li>
-          <li>Init app load is complete? {{ initAppLoadIsComplete }}</li>
-        </ul>
-      </div>
-      <div v-if="hasTrans">
-        The trans type is {{ transType }}.
-        <br>
-        Should it be playing? {{ isPlaying }}
-      </div>
-      <div v-else>
-        There is no transition set.
-      </div>
-    </div>
-
-    <transition :duration="500" mode="out-in">
-    <router-view></router-view>
+    <trans-default></trans-default>
+    <trans-init></trans-init>
+    <transition :duration="250" mode="out-in">
+      <router-view></router-view>
     </transition>
   </div>
 </template>
@@ -29,13 +12,15 @@
 import LayoutHeader from "VUE_COMPONENT/layout/header/LayoutHeader.vue";
 import LayoutFooter from "VUE_COMPONENT/layout/footer/LayoutFooter.vue";
 import TransDefault from "VUE_COMPONENT/trans/default/Main.vue";
+import TransInit from "VUE_COMPONENT/trans/init/Main.vue";
 
 export default {
   name: "app",
   components: {
     LayoutHeader,
     LayoutFooter,
-    TransDefault
+    TransDefault,
+    TransInit
   },
   computed: {
     transType () {
@@ -44,8 +29,8 @@ export default {
     hasTrans () {
       return this.$store.getters["trans/hasTrans"];
     },
-    isPlaying () {
-      return this.$store.state.trans.play;
+    shouldPlay () {
+      return this.$store.getters["trans/shouldPlay"];
     },
     totalAssets () {
       return this.$store.state.loading.currentPage.totalAssets;

@@ -1,12 +1,29 @@
 <template>
-  <div class="trans trans--default">
-  </div>
+  <transition name="trans-default" v-on:after-enter="afterEnter">
+    <div v-if="shouldPlay" class="trans trans--default">
+      <div class="trans__guts">
+        Loading (default)
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
 
 export default {
-  name: "component-trans-default"
+  name: "component-trans-default",
+  computed: {
+    shouldPlay () {
+      return this.$store.getters["trans/currentTrans"] === "default";
+    }
+  },
+  methods: {
+    afterEnter () {
+      window.setTimeout(() => {
+        this.$store.commit("trans/leave");
+      }, 200);
+    }
+  }
 };
 </script>
 
@@ -20,5 +37,20 @@ export default {
 
 .trans--default
   background-color: black
+
+.trans-default-enter-active
+  transform: translateX(0)
+  transition: transform 0.25s
+
+.trans-default-enter
+  transform: translateX(-100%)
+
+.trans-default-leave-active
+  transform: translateX(100%)
+  transition: transform 0.25s
+
+.trans-default-leave
+  transform: translateX(0)
+
 
 </style>

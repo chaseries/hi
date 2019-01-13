@@ -14,6 +14,9 @@ export const createApp = function createApp() {
   sync(store, router);
 
   router.beforeEach((to, from, next) => {
+    if (store.state.loading.initAppLoadIsComplete) {
+      store.commit("trans/enter");
+    }
     next();
   });
 
