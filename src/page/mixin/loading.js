@@ -3,7 +3,6 @@ export default {
   beforeMount () {
     const images = this.$options.loadableImages;
     if (images && !this.$store.state.loading.initAppLoadIsComplete) {
-      console.log("The app load is not complete.");
       this.$store.dispatch("loading/preload", images);
     }
   },

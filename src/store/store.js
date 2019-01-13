@@ -3,6 +3,7 @@ import Vuex from "vuex";
 import post from "./post/module";
 import trans from "./trans/module";
 import loading from "./loading/module";
+import modal from "./modal/module";
 
 Vue.use(Vuex);
 
@@ -12,7 +13,8 @@ export const createStore = function createStore() {
     modules: {
       post,
       trans,
-      loading
+      loading,
+      modal
     }
   });
 };

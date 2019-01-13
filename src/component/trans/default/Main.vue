@@ -2,7 +2,6 @@
   <transition name="trans-default" v-on:after-enter="afterEnter">
     <div v-if="shouldPlay" class="trans trans--default">
       <div class="trans__guts">
-        Loading (default)
       </div>
     </div>
   </transition>

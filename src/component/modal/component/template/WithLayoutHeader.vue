@@ -1,6 +1,7 @@
 <template>
-  <div class="hero">
+  <div>
     <layout-header></layout-header>
+    <slot></slot>
   </div>
 </template>
 
@@ -9,15 +10,6 @@ import LayoutHeader from "VUE_COMPONENT/layout/header/LayoutHeader.vue";
 
 
 export default {
-  name: "component-hero-hero",
-  components: {
-    LayoutHeader
-  }
+  name: "component-modal-component-template-with-layout-header"
 };
 </script>
-
-<style lang="sass">
-
-.hero
-  background-color: #222
-</style>

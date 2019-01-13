@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <modal></modal>
     <trans-default></trans-default>
     <trans-init></trans-init>
     <transition :duration="250" mode="out-in">
@@ -13,6 +14,7 @@ import LayoutHeader from "VUE_COMPONENT/layout/header/LayoutHeader.vue";
 import LayoutFooter from "VUE_COMPONENT/layout/footer/LayoutFooter.vue";
 import TransDefault from "VUE_COMPONENT/trans/default/Main.vue";
 import TransInit from "VUE_COMPONENT/trans/init/Main.vue";
+import Modal from "VUE_COMPONENT/modal/Modal.vue";
 
 export default {
   name: "app",
@@ -20,7 +22,8 @@ export default {
     LayoutHeader,
     LayoutFooter,
     TransDefault,
-    TransInit
+    TransInit,
+    Modal
   },
   computed: {
     transType () {
