@@ -1,5 +1,8 @@
 <template>
-  <component @click="toggle" :is="component" :dur="dur"></component>
+  <component
+    :is="component"
+    :dur="dur">
+  </component>
 </template>
 
 <script>
@@ -22,11 +25,6 @@ export default {
     dur: {
       required: true,
       type: Number
-    }
-  },
-  methods: {
-    toggle () {
-      console.log("Toggling...");
     }
   },
   computed: {

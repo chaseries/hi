@@ -1,7 +1,12 @@
 <template>
-  <header class="layout-header">
-    <transition name="layout-header__nav">
-      <button-navicon></button-navicon>
+  <header id="layout-header" class="layout-header">
+    <div class="layout-header__wrap">
+    <!-- see note below about `enter` method -->
+    <transition name="layout-header__nav"
+      v-on:enter="getLayoutHeaderHeight">
+      <button-navicon
+        v-if="shouldDisplay">
+      </button-navicon>
     </transition>
     <transition
       name="layout-header__logo">
@@ -9,7 +14,7 @@
         v-if="shouldDisplay"
         class="layout-header-flex-item">
         <icon-logotype
-          fill="ffffff"
+          :fill="fill"
           width="100"
           height="35">
         </icon-logotype>
@@ -19,11 +24,12 @@
       <icon-user
         v-if="shouldDisplay"
         class="layout-header-flex-item"
-        fill="white"
+        :fill="fill"
         width="0.6em"
         height="0.8em">
       </icon-user>
     </transition>
+    </div> <!-- layout-header__wrap -->
   </header>
 </template>
 
@@ -39,10 +45,31 @@ export default {
     IconUser,
     ButtonNavicon
   },
+  methods: {
+    getLayoutHeaderHeight () {
+      // Collect the layout header height to be used for spacing in the modal else-
+      // where. Has to be done after the header has been set in the DOM. Doesn't
+      // work on `enter`, but `afterEnter` is too late, hence the timeout.
+      const layoutHeader = document.getElementById("layout-header");
+      window.setTimeout(() => {
+        console.log("The layout header offset height is", layoutHeader.offsetHeight);
+        this.$store.commit("misc/setLayoutHeaderHeight", layoutHeader.offsetHeight);
+      }, 100);
+      window.addEventListener("resize", () => {
+        this.$store.commit("misc/setLayoutHeaderHeight", layoutHeader.offsetHeight);
+      });
+    }
+  },
   computed: {
     shouldDisplay () {
       return this.$store.state.loading.initAppLoadIsComplete;
+    },
+    fill () {
+      return this.$store.state.modal.open ? "black" : "white";
     }
+  },
+  mounted () {
+    // Because for some reason this doesn't work without a timeout
   }
 };
 </script>
@@ -52,16 +79,20 @@ export default {
 @mixin layout-header-item-enter-active
   transform: translateY(0)
   opacity: 1
-  transition: transform 0.5s cubic-bezier(0, 0.55, 0.35, 1), opacity 0.5s
+  transition: transform 0.5s cubic-bezier(0, 0.55, 0.35, 1) 0.8s, opacity 0.5s linear 0.8s
 
 @mixin layout-header-item-enter
   opacity: 0
   transform: translateY(-100%)
 
 .layout-header
-  display: flex
-  justify-content: space-between
+  position: relative
   padding: 1em 0
+  z-index: 110
+  &__wrap
+    padding: 0 1em
+    display: flex
+    justify-content: space-between
 
 .layout-header-flex-item
   align-self: center

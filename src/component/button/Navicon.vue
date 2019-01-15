@@ -1,12 +1,16 @@
 <template>
-  <div @click="toggle">
-    <icon-navicon :direction="direction" :dur="0.2"></icon-navicon>
-  </div>
+  <button
+    @click="toggle"
+    class="stripped-button">
+    <icon-navicon
+      :direction="direction"
+      :dur="0.2"
+      :fill="fill"></icon-navicon>
+  </button>
 </template>
 
 <script>
 import IconNavicon from "VUE_COMPONENT/icon/navicon/Navicon.vue";
-import Nav from "VUE_COMPONENT/modal/component/Nav.vue";
 
 
 export default {
@@ -22,7 +26,7 @@ export default {
   methods: {
     toggle () {
       if (!this.modalOpen) {
-        this.$store.commit("modal/open", Nav);
+        this.$store.commit("modal/open", "Nav.vue");
         console.log("The modal state is", this.$store.state.modal);
       } else {
         this.$store.commit("modal/close");
@@ -38,6 +42,9 @@ export default {
     },
     modalComponentIsNav () {
       return this.$store.state.modal.component === "Nav";
+    },
+    fill () {
+      return this.$store.state.modal.open ? "black" : "white";
     }
   },
   watch: {

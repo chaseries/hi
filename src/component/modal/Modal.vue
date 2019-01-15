@@ -20,7 +20,9 @@ export default {
       return this.$store.state.modal.open;
     },
     component () {
-      return this.$store.state.modal.component;
+      const componentName = this.$store.state.modal.component;
+      return () => import(`./component/${componentName}`);
+      //return this.$store.state.modal.component;
     }
   },
   mounted () {

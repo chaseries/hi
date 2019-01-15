@@ -4,6 +4,7 @@ import post from "./post/module";
 import trans from "./trans/module";
 import loading from "./loading/module";
 import modal from "./modal/module";
+import misc from "./misc/module";
 
 Vue.use(Vuex);
 
@@ -14,7 +15,8 @@ export const createStore = function createStore() {
       post,
       trans,
       loading,
-      modal
+      modal,
+      misc
     }
   });
 };
