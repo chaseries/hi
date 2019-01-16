@@ -1,43 +1,31 @@
 import { lookupTrans } from "./util";
 
-const defaultDuration = 250;
-const homeToWorkDuration = 600;
-
 const state = {
   play: false,
   override: null,
-  defaults: [
-    { from: "/", to: "/works/straylight", trans: "homeToWork", homeToWorkDuration },
-    { from: "/", to: "/works/ries", trans: "homeToWork", homeToWorkDuration },
-    { from: "/", to: "/works/suskie", trans: "homeToWork", homeToWorkDuration },
-    { from: "*", to: "*", trans: "default", duration: defaultDuration }
-  ]
+  defaults: []
 };
 
 const mutations = {
 
-  enter(state) {
-    state.play = true;
-  },
-
-  leave(state) {
-    state.play = false;
-  },
-
-  setOverride(state, transName) {
-    state.transType = transName;
-  },
-
-  purgeOverride(state) {
-    state.transType = null;
-  },
-
-  setDefaults(state) {
+  initialize (state, defaults) {
     state.defaults = defaults;
   },
 
-  purgeDefaults(state) {
-    state.defaults = [];
+  enter (state) {
+    state.play = true;
+  },
+
+  leave (state) {
+    state.play = false;
+  },
+
+  setOverride (state, transName) {
+    state.transType = transName;
+  },
+
+  purgeOverride (state) {
+    state.transType = null;
   }
 };
 

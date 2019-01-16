@@ -15,7 +15,7 @@ import { mapGetters } from "vuex";
 
 
 export default {
-  name: "page-post",
+  name: "page-digest",
   asyncData ({store, route}) {
     return store.dispatch("post/fetchPost", route.params.id);
   },

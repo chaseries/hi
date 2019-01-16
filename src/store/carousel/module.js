@@ -1,32 +1,15 @@
-const straylight = {
-  title: "Straylight",
-  slug: "straylight"
-};
-
-const ries = {
-  title: "Ries",
-  slug: "ries"
-};
-
-const suskie = {
-  title: "Suskie",
-  slug: "suskie"
-};
-
-const items = [
-  straylight,
-  ries,
-  suskie
-];
-
-
 const state = {
-  items: [ ...items ],
+  items: [],
   paused: false,
   locked: false
 };
 
 const mutations = {
+
+  initialize (state, items) {
+    state.items = items;
+  },
+
   prev (state) {
     if (!state.locked) {
       const last = state.items[state.items.length - 1];
