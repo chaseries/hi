@@ -40,17 +40,20 @@ export const transSettings = {
 
 const carouselStraylight = {
   title: "Straylight",
-  slug: "straylight"
+  slug: "straylight",
+  theme: "ffd2b5"
 };
 
 const carouselRies = {
   title: "Ries",
-  slug: "ries"
+  slug: "ries",
+  theme: "00ffc0"
 };
 
 const carouselSuskie = {
   title: "Suskie",
-  slug: "suskie"
+  slug: "suskie",
+  theme: "d04436"
 };
 
 export const carouselSettings = [

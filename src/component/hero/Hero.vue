@@ -45,6 +45,10 @@ $easing: cubic-bezier(0, 1.00, 0.0, 1)
   background-color: #111
   min-height: 100vh;
   overflow: hidden
+  // DELETE
+  background-image: url("/img/bg.png")
+  background-size: cover
+  background-position: center center
 
 .carousel-main
   // DELETE BELOW

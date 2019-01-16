@@ -66,9 +66,6 @@ export default {
     fill () {
       return this.$store.state.modal.open ? "black" : "white";
     }
-  },
-  mounted () {
-    // Because for some reason this doesn't work without a timeout
   }
 };
 </script>
@@ -79,7 +76,7 @@ export default {
 @mixin layout-header-item-enter-active
   transform: translateY(0)
   opacity: 1
-  transition: transform 0.5s cubic-bezier(0, 0.55, 0.35, 1) 0.8s, opacity 0.5s linear 0.8s
+  transition: transform 0.7s cubic-bezier(0, 0.70, 0.10, 1) 0.8s, opacity 0.7s linear 0.8s
 
 @mixin layout-header-item-enter
   opacity: 0
