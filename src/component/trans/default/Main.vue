@@ -13,7 +13,12 @@ export default {
   name: "component-trans-default",
   computed: {
     shouldPlay () {
-      return this.$store.getters["trans/currentTrans"] === "default";
+      const currentTrans = this.$store.getters["trans/currentTrans"];
+      if (currentTrans && (currentTrans.name === "default")) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
   methods: {

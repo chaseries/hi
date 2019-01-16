@@ -28,8 +28,8 @@ export default {
     }
   },
   created () {
-    this.$store.commit("trans/initialize", settings.transDefaults);
-    this.$store.commit("carousel/initialize", settings.carouselItems);
+    this.$store.commit("trans/initialize", settings.transSettings);
+    this.$store.commit("carousel/initialize", settings.carouselSettings);
   }
 };
 </script>

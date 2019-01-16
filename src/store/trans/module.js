@@ -3,13 +3,15 @@ import { lookupTrans } from "./util";
 const state = {
   play: false,
   override: null,
+  init: null,
   defaults: []
 };
 
 const mutations = {
 
-  initialize (state, defaults) {
-    state.defaults = defaults;
+  initialize (state, settings) {
+    state.init = settings.init;
+    state.defaults = settings.defaults;
   },
 
   enter (state) {
@@ -41,7 +43,7 @@ const getters = {
     const possibleTrans = lookupTrans(state, from, to);
     console.log("The from is:", from, "and the to is:", to, "and the trans should be:", possibleTrans);
     if (!rootState.loading.initAppLoadIsComplete) {
-      return "init"; 
+      return state.init;
     } else {
       return state.play ? lookupTrans(state, from, to) : null;
     }

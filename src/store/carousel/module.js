@@ -5,7 +5,6 @@ const state = {
 };
 
 const mutations = {
-
   initialize (state, items) {
     state.items = items;
   },
@@ -40,13 +39,8 @@ const mutations = {
 };
 
 
-const getters = {
-
-};
-
 export default {
   namespaced: true,
   state,
-  mutations,
-  getters
+  mutations
 };
