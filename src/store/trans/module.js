@@ -1,11 +1,16 @@
 import { lookupTrans } from "./util";
 
+const defaultDuration = 250;
+const homeToWorkDuration = 600;
 
 const state = {
   play: false,
   override: null,
   defaults: [
-    { from: "*", to: "*", trans: "default" }
+    { from: "/", to: "/works/straylight", trans: "homeToWork", homeToWorkDuration },
+    { from: "/", to: "/works/ries", trans: "homeToWork", homeToWorkDuration },
+    { from: "/", to: "/works/suskie", trans: "homeToWork", homeToWorkDuration },
+    { from: "*", to: "*", trans: "default", duration: defaultDuration }
   ]
 };
 
@@ -46,6 +51,7 @@ const getters = {
     const from = rootState.route.from.path;
     const to = rootState.route.path;
     const possibleTrans = lookupTrans(state, from, to);
+    console.log("The from is:", from, "and the to is:", to, "and the trans should be:", possibleTrans);
     if (!rootState.loading.initAppLoadIsComplete) {
       return "init"; 
     } else {

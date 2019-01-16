@@ -52,7 +52,6 @@ export default {
       // work on `enter`, but `afterEnter` is too late, hence the timeout.
       const layoutHeader = document.getElementById("layout-header");
       window.setTimeout(() => {
-        console.log("The layout header offset height is", layoutHeader.offsetHeight);
         this.$store.commit("misc/setLayoutHeaderHeight", layoutHeader.offsetHeight);
       }, 100);
       window.addEventListener("resize", () => {
@@ -75,6 +74,7 @@ export default {
 </script>
 
 <style lang="sass">
+@import "~SASS/global/class";
 
 @mixin layout-header-item-enter-active
   transform: translateY(0)
@@ -90,7 +90,8 @@ export default {
   padding: 1em 0
   z-index: 110
   &__wrap
-    padding: 0 1em
+    @include wrap
+    padding: 1em 1em 0 1em
     display: flex
     justify-content: space-between
 

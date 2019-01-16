@@ -2,39 +2,25 @@
   <div class="hero">
     <layout-header></layout-header>
     <carousel></carousel>
-    <!-- <div class="carousel-main"> -->
-      <!-- <transition -->
-      <!-- name="carousel-main__superheading"> -->
-        <!-- <div -->
-          <!-- v-if="shouldDisplay" -->
-          <!-- class="carousel-main__superheading"> -->
-          <!-- Featured project -->
-        <!-- </div> -->
-      <!-- </transition> -->
-      <!-- <transition -->
-        <!-- name="carousel-main__heading"> -->
-        <!-- <h1 -->
-          <!-- v-if="shouldDisplay" -->
-          <!-- class="carousel-main__heading"> -->
-          <!-- Straylight -->
-        <!-- </h1> -->
-      <!-- </transition> -->
-    <!-- </div> -->
-    <div class="subguts">
-    </div>
+    <sub-header
+      heading="Welcome to Heavy Industries"
+      body="Lorsque j'avais six ans j'ai vu, une fois, une magnifique image, dans un livre sur la Forêt Vierge qui s'appelait Histoires Vécues."
+      ></sub-header>
   </div>
 </template>
 
 <script>
 import LayoutHeader from "VUE_COMPONENT/layout/header/LayoutHeader.vue";
 import Carousel from "VUE_COMPONENT/carousel/Carousel.vue";
+import SubHeader from "VUE_COMPONENT/subheader/SubHeader.vue";
 
 
 export default {
   name: "component-hero-hero",
   components: {
     LayoutHeader,
-    Carousel
+    Carousel,
+    SubHeader
   },
   computed: {
     shouldDisplay () {
@@ -58,6 +44,7 @@ $easing: cubic-bezier(0, 1.00, 0.0, 1)
   color: white
   background-color: #111
   min-height: 100vh;
+  overflow: hidden
 
 .carousel-main
   // DELETE BELOW

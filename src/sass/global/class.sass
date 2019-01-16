@@ -1,6 +1,25 @@
+$glrp: 1rem
+
+@mixin glrp
+  padding-left: $glrp
+  padding-right: $glrp
+
+@mixin center
+  margin: 0 auto
+
+@mixin wrap
+  @include center
+  @include glrp
+  width: 100%
+  @media screen and (min-width: 1000px)
+    max-width: 1000px
+  @media screen and (min-width: 1176px)
+    max-width: 85vw
 
 .stripped-button
   border: 0
   padding: 0
   background: none
   outline: none
+
+.wrap

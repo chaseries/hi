@@ -17,9 +17,6 @@ export default {
     layoutHeaderHeight () {
       return this.$store.state.misc.layoutHeaderHeight;
     }
-  },
-  mounted () {
-    console.log("The layout header height is", this.layoutHeaderHeight);
   }
 };
 </script>

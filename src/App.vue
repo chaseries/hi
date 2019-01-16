@@ -3,7 +3,7 @@
     <modal></modal>
     <trans-default></trans-default>
     <trans-init></trans-init>
-    <transition :duration="250" mode="out-in">
+    <transition :duration="transDuration" mode="out-in">
       <router-view></router-view>
     </transition>
   </div>
@@ -46,6 +46,9 @@ export default {
     },
     initAppLoadIsComplete () {
       return this.$store.state.loading.initAppLoadIsComplete;
+    },
+    transDuration () {
+      return 1000;
     }
   }
 };

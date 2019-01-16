@@ -27,7 +27,6 @@ export default {
     toggle () {
       if (!this.modalOpen) {
         this.$store.commit("modal/open", "Nav.vue");
-        console.log("The modal state is", this.$store.state.modal);
       } else {
         this.$store.commit("modal/close");
       }
