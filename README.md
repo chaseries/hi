@@ -1,12 +1,3 @@
-# Vue SSR Starter
+# Heavy Industries website
 
-## To use:
-
-```
-$ npm run watch
-$ node server.js <port number> `# defaults to 8080`
-```
-
-## What it is
-
-A Vue server side rendered web application.
+Clone, run `npm i` and `npm run watch`, then `node server.js`.
