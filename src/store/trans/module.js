@@ -5,7 +5,8 @@ const state = {
   play: false,
   override: null,
   init: null,
-  defaults: []
+  defaults: [],
+  transComplete: false
 };
 
 const mutations = {
@@ -21,6 +22,10 @@ const mutations = {
 
   leave (state) {
     state.play = false;
+  },
+
+  setTransComplete(state, bool) {
+    state.transComplete = bool;
   },
 
   setOverride (state, transName) {

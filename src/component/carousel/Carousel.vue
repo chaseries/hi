@@ -48,7 +48,8 @@ export default {
     },
     getItemLoadClass(i) {
       const appIsLoaded = this.$store.state.loading.initAppLoadIsComplete;
-      return appIsLoaded ? "" : `carousel__item--loading--${i}`;
+      const transComplete = this.$store.state.trans.transComplete;
+      return (appIsLoaded && transComplete) ? "" : `carousel__item--loading--${i}`;
     },
     prev () {
       if (!this.$store.state.carousel.locked) {
@@ -76,9 +77,6 @@ export default {
         this.direction = "";
         this.$store.commit("carousel/unlock");
       }
-    },
-    handleTiming () {
-
     }
   },
   computed: {
@@ -100,20 +98,31 @@ export default {
     },
     carouselState () {
       return this.$store.state.carousel;
+    },
+    ready () {
+      const appIsLoaded = this.$store.state.loading.initAppLoadIsComplete;
+      const transComplete = this.$store.state.trans.transComplete;
+      return appIsLoaded && transComplete;
     }
   },
-  beforeMount () {
-    this.$store.commit("carousel/setLastChanged");
+  watch: {
+    ready (isReady, prev) {
+      if (isReady) {
+        this.$store.commit("carousel/setLastChanged");
+        console.log("The value of isReady is", isReady, "change from from", prev);
+        this.intervalId = window.setInterval(() => {
+          const now = new Date();
+          if (!this.$store.state.carousel.paused) {
+            if (now - this.$store.state.carousel.lastChanged > 5000) {
+              this.next();
+            }
+          }
+        }, 100);
+      }
+    }
+
   },
   mounted () {
-    this.intervalId = window.setInterval(() => {
-      const now = new Date();
-      if (!this.$store.state.carousel.paused) {
-        if (now - this.$store.state.carousel.lastChanged > 5000) {
-          this.next();
-        }
-      }
-    }, 100);
     const carousel = document.getElementById("carousel");
     window.addEventListener("keyup", this.handleKeyCodes);
     if (carousel) {

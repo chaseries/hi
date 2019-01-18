@@ -9,7 +9,6 @@ const state = {
 const mutations = {
   initialize (state, items) {
     state.items = items;
-    state.lastChanged = new Date();
   },
 
   prev (state) {

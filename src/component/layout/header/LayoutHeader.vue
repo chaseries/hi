@@ -61,7 +61,9 @@ export default {
   },
   computed: {
     shouldDisplay () {
-      return this.$store.state.loading.initAppLoadIsComplete;
+      const initAppLoadIsComplete = this.$store.state.loading.initAppLoadIsComplete;
+      const transComplete = this.$store.state.trans.transComplete;
+      return initAppLoadIsComplete && transComplete;
     },
     fill () {
       return this.$store.state.modal.open ? "black" : "white";

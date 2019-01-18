@@ -9,7 +9,7 @@ const homeToWorkDuration = 600;
 const transitions = {
   init: {
     name: "init",
-    duration: 250,
+    duration: 1000,
     suspend: 0,
     component: TransInit
   },

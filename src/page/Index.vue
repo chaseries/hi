@@ -20,8 +20,13 @@ export default {
   components: {
     Hero
   },
+  mounted () {
+    if (process.env.VUE_ENV === "client") {
+      const paper = require("paper");
+    }
+  },
   loadableImages: [
-    //"https://bit.ly/2yq6794"
+    "https://bit.ly/2yq6794"
   ]
 };
 </script>
