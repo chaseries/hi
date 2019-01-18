@@ -16,7 +16,6 @@ export const createApp = function createApp() {
     if (store.state.loading.initAppLoadIsComplete) {
       store.commit("trans/enter");
     }
-    //next();
   });
 
   const app = new Vue({

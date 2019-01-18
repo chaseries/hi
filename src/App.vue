@@ -1,8 +1,7 @@
 <template>
   <div id="app">
     <modal></modal>
-    <trans-default></trans-default>
-    <trans-init></trans-init>
+    <trans-container></trans-container>
     <transition :duration="transDuration" mode="out-in">
       <router-view></router-view>
     </transition>
@@ -11,20 +10,27 @@
 
 <script>
 import * as settings from "./settings";
-import TransDefault from "VUE_COMPONENT/trans/default/Main.vue";
-import TransInit from "VUE_COMPONENT/trans/init/Main.vue";
+import TransContainer from "VUE_COMPONENT/trans/Container.vue";
 import Modal from "VUE_COMPONENT/modal/Modal.vue";
 
 export default {
   name: "app",
   components: {
-    TransDefault,
-    TransInit,
+    TransContainer,
     Modal
+  },
+  methods: {
+    getTransComponent (trans) {
+      if (trans) { return trans.component; }
+      return null;
+    }
   },
   computed: {
     transDuration () {
-      return 1000;
+      return this.$store.getters["trans/currentTrans"].duration;
+    },
+    playState () {
+      return this.$store.getters["trans/shouldPlay"];
     }
   },
   created () {

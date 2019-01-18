@@ -12,14 +12,10 @@
 
 export default {
   name: "component-trans-init",
-  computed: {
-    shouldPlay () {
-      const currentTrans = this.$store.getters["trans/currentTrans"];
-      if (currentTrans && (currentTrans.name === "init")) {
-        return true;
-      } else {
-        return false;
-      }
+  props: {
+    shouldPlay: {
+      required: true,
+      type: Boolean
     }
   }
 };

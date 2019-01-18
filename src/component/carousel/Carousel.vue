@@ -1,19 +1,19 @@
 <template>
-  <div>
-    <div id="carousel" :class="['carousel', carouselAnimState]">
-      <div
-        v-for="(item, k) in rotation"
-        :key="k"
-        :class="[getItemDefaultClass(k + 1), getItemLoadClass(k + 1)]">
-        <template v-if="k === 2">
-          <router-link :to="getProjectUrl(item.slug)">
-            <h2>{{ item.title }}</h2>
-          </router-link>
-        </template>
-        <template v-else>
-            <h2 @click="rotateCarousel(k + 1)">{{ item.title }}</h2>
-        </template>
-      </div>
+  <div
+    id="carousel"
+    :class="['carousel', carouselAnimState]">
+    <div
+      v-for="(item, k) in rotation"
+      :key="k"
+      :class="[getItemDefaultClass(k + 1), getItemLoadClass(k + 1)]">
+      <template v-if="k === 2">
+        <h2 @click="handleNavigation">
+          <router-link :to="getProjectUrl(item.slug)">{{ item.title }}</router-link>
+        </h2>
+      </template>
+      <template v-else>
+          <h2 @click="rotateCarousel(k + 1)">{{ item.title }}</h2>
+      </template>
     </div>
   </div>
 </template>
@@ -24,15 +24,22 @@ export default {
   name: "",
   data () {
     return {
-      direction: null
+      direction: null,
+      intervalId: null
     };
   },
   methods: {
+    handleNavigation () {
+      console.log("Handling navigation...");
+      this.$store.commit("carousel/setNavigating", true);
+      console.log("The navigation state is", this.$store.state.carousel);
+      console.log("But the computed property says", this.carouselState);
+      console.log("Are they equal?", this.$store.state.carousel === this.carouselState);
+    },
     getProjectUrl (slug) {
       return `/works/${slug}`;
     },
     rotateCarousel (k) {
-      console.log("I'm about to rotate. The value of `k` is", k);
       if (k === 2) { this.prev(); }
       if (k === 4) { this.next(); }
     },
@@ -69,6 +76,9 @@ export default {
         this.direction = "";
         this.$store.commit("carousel/unlock");
       }
+    },
+    handleTiming () {
+
     }
   },
   computed: {
@@ -82,22 +92,46 @@ export default {
         items[2 % items.length]
       ];
     },
-    shouldDisplay () {
-      return this.$store.state.loading.initAppLoadIsComplete;
-    },
     carouselAnimState () {
       return this.direction ? `carousel--anim-${this.direction}` : "";
+    },
+    navigating () {
+      return this.$store.state.carousel.navigating;
+    },
+    carouselState () {
+      return this.$store.state.carousel;
     }
   },
+  beforeMount () {
+    this.$store.commit("carousel/setLastChanged");
+  },
   mounted () {
+    this.intervalId = window.setInterval(() => {
+      const now = new Date();
+      if (!this.$store.state.carousel.paused) {
+        if (now - this.$store.state.carousel.lastChanged > 5000) {
+          this.next();
+        }
+      }
+    }, 100);
     const carousel = document.getElementById("carousel");
     window.addEventListener("keyup", this.handleKeyCodes);
-    carousel.addEventListener("animationend", this.cleanupTransition);
+    if (carousel) {
+      carousel.addEventListener("animationend", this.cleanupTransition);
+    }
   },
   beforeDestroy () {
     const carousel = document.getElementById("carousel");
     window.removeEventListener("keyup", this.handleKeyCodes);
-    carousel.removeEventListener("animationend", this.cleanupTransition);
+    if (carousel) {
+      carousel.removeEventListener("animationend", this.cleanupTransition);
+    }
+    if (this.$store.state.carousel.navigating) {
+      this.$store.commit("carousel/setNavigating", false);
+    }
+    if (this.intervalId) {
+      window.clearInterval(this.intervalId);
+    }
   }
 };
 </script>
@@ -160,6 +194,13 @@ $opacity-easing: linear
 
 .carousel__item--3
   z-index: 10
+
+.carousel-trans-leave-active
+  opacity: 0
+  transition: opacity 0.15s
+
+.carousel-trans-leave
+  opacity: 1
 
 
 @keyframes carousel--anim-forwards

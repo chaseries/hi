@@ -1,4 +1,7 @@
 // Trans store module
+import TransInit from "VUE_COMPONENT/trans/init/Main.vue";
+import TransDefault from "VUE_COMPONENT/trans/default/Main.vue";
+import TransHomeToWork from "VUE_COMPONENT/trans/home-to-work/Main.vue";
 
 const defaultDuration = 250;
 const homeToWorkDuration = 600;
@@ -7,17 +10,20 @@ const transitions = {
   init: {
     name: "init",
     duration: 250,
-    easing: "linear"
+    suspend: 0,
+    component: TransInit
   },
   default: {
     name: "default",
-    duration: 250,
-    easing: []
+    duration: { enter: 250, leave: 250 },
+    suspend: 200,
+    component: TransDefault
   },
   homeToWork: {
     name: "homeToWork",
-    duration: 600,
-    easing: []
+    duration: 1000,
+    suspend: 0,
+    component: TransHomeToWork
   }
 };
 

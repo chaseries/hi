@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Hero from "VUE_COMPONENT/hero/Hero.vue";
+import Hero from "VUE_COMPONENT/hero/HeroElse.vue";
 import loadingMixin from "VUE_PAGE/mixin/loading";
 
 

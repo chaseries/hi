@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <!-- This transition intentionally left empty because it's handled in canvas -->
+  <div v-if="shouldPlay">
   </div>
 </template>
 
@@ -8,17 +7,20 @@
 
 export default {
   name: "component-trans-default",
-  computed: {
-    shouldPlay () {
-      return this.$store.getters["trans/currentTrans"] === "homeToWork";
+  props: {
+    shouldPlay: {
+      required: true,
+      type: Boolean
+    },
+    duration: {
+      required: true,
+      type: Number
     }
   },
-  methods: {
-    afterEnter () {
-      window.setTimeout(() => {
-        this.$store.commit("trans/leave");
-      }, 200);
-    }
+  mounted () {
+    window.setTimeout(() => {
+      this.$store.commit("trans/leave");
+    }, this.duration);
   }
 };
 </script>

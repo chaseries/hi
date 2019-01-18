@@ -1,5 +1,6 @@
 import { lookupTrans } from "./util";
 
+
 const state = {
   play: false,
   override: null,
@@ -41,11 +42,10 @@ const getters = {
     const from = rootState.route.from.path;
     const to = rootState.route.path;
     const possibleTrans = lookupTrans(state, from, to);
-    console.log("The from is:", from, "and the to is:", to, "and the trans should be:", possibleTrans);
     if (!rootState.loading.initAppLoadIsComplete) {
       return state.init;
     } else {
-      return state.play ? lookupTrans(state, from, to) : null;
+      return lookupTrans(state, from, to);
     }
   },
 
